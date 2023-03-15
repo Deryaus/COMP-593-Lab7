@@ -6,8 +6,7 @@ Description:
 Usage:
  python old_people.py
 """
-import os
-import inspect 
+import os, inspect, sqlite3
 
 def main():
     global db_path
@@ -33,19 +32,23 @@ def get_old_people():
     # TODO: Create function body
     # 
     con = sqlite3.connect(db_path)
-    cur = con.cursoer()
+    cur = con.cursor()
 
     # define query
-    old_people = """
-        select name, age
-        WHERE age > = 50
-               
-        
+    old_people_query = """
+        select name, age FROM people
+        WHERE age >= 50
         """
     
+    cur.execute(old_people_query)
+    query_result = cur.fetchall()
+    pass
+    con.close()
+
     
     
-    return []
+    return [query_result]
+    
 
 def print_name_and_age(name_and_age_list):
     """Prints name and age of all people in provided list
@@ -54,6 +57,9 @@ def print_name_and_age(name_and_age_list):
         name_and_age_list (list): (name, age) of people
     """
     # TODO: Create function body
+
+    for name in name_and_age_list:
+        print(name)
     return
 
 def save_name_and_age_to_csv(name_and_age_list, csv_path):
