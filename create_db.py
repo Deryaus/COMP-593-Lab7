@@ -1,11 +1,11 @@
-"""
+"""--------------------ι𝐍Ⓙย𝐬𝓣ᶤςⒺ Ⓐ𝐍ＹωᕼⒺг𝐄 ᶤ𝐬 ᵃ tｈяᗴＡт ⓉＯ 𝐣υ𝔰ｔ𝐢ᶜⓔ 𝐄V乇яｙ山卄εŘ乇 --------------------
 Description:
  Creates the people table in the Social Network database
  and populates it with 200 fake people.
 
 Usage:
  python create_db.py
-"""
+--------------------ι𝐍Ⓙย𝐬𝓣ᶤςⒺ Ⓐ𝐍ＹωᕼⒺг𝐄 ᶤ𝐬 ᵃ tｈяᗴＡт ⓉＯ 𝐣υ𝔰ｔ𝐢ᶜⓔ 𝐄V乇яｙ山卄εŘ乇 --------------------"""
 import os, inspect, sqlite3, datetime
 from faker import Faker
 from datetime import datetime
@@ -50,16 +50,11 @@ def create_people_table():
     # pending transactions that have not been committed will be lost.
     con.close()
 
-
-    
-    return
-
 def populate_people_table():
     """Populates the people table with 200 fake people"""
-    # TODO: Create function body
     fake = Faker('en_CA')
     fake_us = Faker('en_US')
-
+    # Open connection to DB.
     con = sqlite3.connect('social_network.db')
     cur = con.cursor()
     # Define an SQL query that inserts a row of data in the people table.
@@ -67,21 +62,19 @@ def populate_people_table():
     # Specific values can be passed as a tuple into the execute() method.
     add_person_query = """
     INSERT INTO people
-    (
-    name,
-    email,
-    address,
-    city,
-    province,
-    bio,
-    age,
-    created_at,
-    updated_at
-    )
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);
+            (
+            name,
+            email,
+            address,
+            city,
+            province,
+            bio,
+            age,
+            created_at,
+            updated_at)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);
     """
-    # Define a tuple of data for the new person to insert into people table
-    # Data values must be in the same order as specified in query
+    # Define a tuple of data for the new person to insert into people table.
     for new_person in range(200):
         new_person = (
             fake.first_name(),
@@ -91,13 +84,12 @@ def populate_people_table():
             fake.administrative_unit(),
             fake_us.sentence(nb_words=10),
             fake.random_int(min=1, max=100),
-            datetime.now(),
-            datetime.now())
-        # Execute query to add new person to people table
+            datetime.now().strftime('%c'),
+            datetime.now().strftime('%c'))
+        # Execute query to add new person to people table.
         cur.execute(add_person_query, new_person)
         con.commit()
     con.close()
-    return
 
 def get_script_dir():
     """Determines the path of the directory in which this script resides
