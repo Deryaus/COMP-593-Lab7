@@ -19,7 +19,7 @@ def main():
 def create_people_table():
     """Creates the people table in the database"""
     # Open a connection to the database.
-    con = sqlite3.connect('social_network.db')
+    con = sqlite3.connect(db_path)
     # Get a Cursor object that can be used to run SQL queries on the database.
     cur = con.cursor()
     # Define an SQL query that creates a table named 'people'.
@@ -55,7 +55,7 @@ def populate_people_table():
     fake = Faker('en_CA')
     fake_us = Faker('en_US')
     # Open connection to DB.
-    con = sqlite3.connect('social_network.db')
+    con = sqlite3.connect(db_path)
     cur = con.cursor()
     # Define an SQL query that inserts a row of data in the people table.
     # The ?'s are placeholders to be fill in when the query is executed.
