@@ -20,8 +20,8 @@ def main():
     print_name_and_age(old_people_list)
 
     # Save the names and ages of all old people to a CSV file
-    old_people_csv = os.path.join(script_dir, 'old_people.csv')
-    save_name_and_age_to_csv(old_people_list, old_people_csv)
+    #old_people_csv = os.path.join(script_dir, 'old_people.csv')
+    #save_name_and_age_to_csv(old_people_list, old_people_csv)
 
 def get_old_people():
     """Queries the Social Network database for all people who are at least 50 years old.
@@ -48,8 +48,9 @@ def print_name_and_age(name_and_age_list):
     Args:
         name_and_age_list (list): (name, age) of people
     """
-    for i in name_and_age_list:
-        print(f'{i[0]} is {i[1]} years old.')
+    
+    for name, age in name_and_age_list:
+        print(f'{name} is {age} years old.')
 
 def save_name_and_age_to_csv(name_and_age_list, csv_path):
     """Saves name and age of all people in provided list
